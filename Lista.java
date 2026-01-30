@@ -1,165 +1,162 @@
 public class Lista {
+
     private int size;
     private Nodo head;
     private Nodo cursor;
 
-    public Lista(){
-        this.size = 0;
-        this.head = null;
-        this.cursor = null;
+    public Lista() {
+        size = 0;
+        head = null;
+        cursor = null;
     }
 
     public int getSize() {
         return size;
     }
+
     public Nodo getHead() {
         return head;
     }
+
     public Nodo getCursor() {
         return cursor;
     }
+
     public void setCursor(Nodo cursor) {
         this.cursor = cursor;
     }
 
-    public void accodaNodo(String valore){
+    public void accodaNodo(Computer valore) {
         Nodo nuovoNodo = new Nodo(valore);
-        if(this.head == null){
-            this.head = nuovoNodo;
-            this.cursor = this.head;
+
+        if (head == null) {
+            head = nuovoNodo;
+            cursor = head;
         } else {
-            Nodo temp = this.head;
-            while(temp.getNext() != null){
+            Nodo temp = head;
+            while (temp.getNext() != null) {
                 temp = temp.getNext();
             }
             temp.setNext(nuovoNodo);
         }
-        this.size++;
+        size++;
     }
 
-    public String leggiNodo(int indice){
-        if(indice <0 || indice >= this.size){
+    public Computer leggiNodo(int indice) {
+        if (indice < 0 || indice >= size) {
             System.out.println("Indice non valido");
-        }
-
-        Nodo temp = this.head;
-        for(int i=0; i<indice;i++){
-            temp = temp.getNext();
-
-        }
-
-        return temp.getValore();
-    }
-
-    public String visitaNodo(){
-
-        if(this.cursor == null){
             return null;
         }
 
-        String valore = this.cursor.getValore();
-        this.cursor = this.cursor.getNext();
+        Nodo temp = head;
+        for (int i = 0; i < indice; i++) {
+            temp = temp.getNext();
+        }
+        return temp.getValore();
+    }
+
+    public Computer visitaNodo() {
+        if (cursor == null)
+            return null;
+
+        Computer valore = cursor.getValore();
+        cursor = cursor.getNext();
         return valore;
     }
 
-    public void inserimentoNodo(String valore, int indice){
-        if(indice <0 || indice > this.size){
+    public void inserimentoNodo(Computer valore, int indice) {
+        if (indice < 0 || indice > size) {
             System.out.println("Indice non valido");
+            return;
         }
 
         Nodo nuovoNodo = new Nodo(valore);
 
-        if(indice == 0){
-            nuovoNodo.setNext(this.head);
-            this.head = nuovoNodo;
+        if (indice == 0) {
+            nuovoNodo.setNext(head);
+            head = nuovoNodo;
         } else {
-            Nodo temp = this.head;
-            for(int i=0; i<indice-1; i++){
+            Nodo temp = head;
+            for (int i = 0; i < indice - 1; i++) {
                 temp = temp.getNext();
             }
             nuovoNodo.setNext(temp.getNext());
             temp.setNext(nuovoNodo);
         }
-        this.size++;
-
+        size++;
     }
 
-    public int ricercaNodo(String valore){
-        Nodo temp = this.head;
+    public int ricercaNodo(Computer valore) {
+        Nodo temp = head;
         int indice = 0;
 
-        while(temp != null){
-            if(temp.getValore().equals(valore)){
+        while (temp != null) {
+            if (temp.getValore().equals(valore))
                 return indice;
-            }
             temp = temp.getNext();
             indice++;
         }
         return -1;
     }
 
-    public void eliminaNodo(int indice){
-        if( indice<0 || indice >= this.size){
+    public void eliminaNodo(int indice) {
+        if (indice < 0 || indice >= size) {
             System.out.println("Indice non valido");
-        }
-
-        if(indice == 0){
-            this.head = this.head.getNext();
-        } else {
-            Nodo temp = this.head;
-            for(int i=0; i<indice-1; i++){
-                temp = temp.getNext();
-            }
-            temp.setNext( temp.getNext().getNext() );
-        }
-        this.size--;
-        if(this.size == 0) {
-            this.cursor = null;
-        }
-
-    }
-
-    public void eliminaTuttiValori(String valore) {
-        while (this.head != null && this.head.getValore().equals(valore)) {
-            this.head = this.head.getNext();
-            this.size--;
-        }
-
-        if (this.head == null) {
-            this.cursor = null;
             return;
         }
 
-        Nodo temp = this.head;
-        while (temp.getNext() != null) {
+        if (indice == 0) {
+            head = head.getNext();
+        } else {
+            Nodo temp = head;
+            for (int i = 0; i < indice - 1; i++) {
+                temp = temp.getNext();
+            }
+            temp.setNext(temp.getNext().getNext());
+        }
+        size--;
+    }
+
+    public void eliminaTuttiValori(Computer valore) {
+        while (head != null && head.getValore().equals(valore)) {
+            head = head.getNext();
+            size--;
+        }
+
+        Nodo temp = head;
+        while (temp != null && temp.getNext() != null) {
             if (temp.getNext().getValore().equals(valore)) {
                 temp.setNext(temp.getNext().getNext());
-                this.size--;
+                size--;
             } else {
                 temp = temp.getNext();
             }
         }
     }
 
-    public void inserimentoOrdinato(String valore){
+    public void inserimentoOrdinato(Computer valore) {
         Nodo nuovoNodo = new Nodo(valore);
 
-        if(this.head == null || this.head.getValore().compareTo(valore) >=0){
-            nuovoNodo.setNext(this.head);
-            this.head = nuovoNodo;
+        if (head == null || head.getValore().compareTo(valore) >= 0) {
+            nuovoNodo.setNext(head);
+            head = nuovoNodo;
         } else {
-            Nodo temp = this.head;
-            while(temp.getNext() != null && temp.getNext().getValore().compareTo(valore) <0){
+            Nodo temp = head;
+            while (temp.getNext() != null &&
+                    temp.getNext().getValore().compareTo(valore) < 0) {
                 temp = temp.getNext();
             }
             nuovoNodo.setNext(temp.getNext());
             temp.setNext(nuovoNodo);
         }
-        this.size++;
+        size++;
     }
 
-
-    public String toString(){
-        return "Liste [size=" + size + ", head=" + head + ", cursor=" + cursor + "]";
+    public void stampaLista() {
+        Nodo temp = head;
+        while (temp != null) {
+            System.out.println(temp.getValore());
+            temp = temp.getNext();
+        }
     }
 }

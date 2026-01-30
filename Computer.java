@@ -4,17 +4,13 @@ public class Computer {
     private String processore;
     private int capacitaRAM;
 
-    public Computer(String marca, String processore, int capacitaRAM){
+    public Computer(String marca, String processore, int capacitaRAM) {
         this.marca = marca;
         this.processore = processore;
         this.capacitaRAM = capacitaRAM;
     }
 
-    public int getCapacitaRAM() {
-        return capacitaRAM;
-    }
-
-    public String getMarca(){
+    public String getMarca() {
         return marca;
     }
 
@@ -22,8 +18,8 @@ public class Computer {
         return processore;
     }
 
-    public void setCapacitaRAM(int capacitaRAM) {
-        this.capacitaRAM = capacitaRAM;
+    public int getCapacitaRAM() {
+        return capacitaRAM;
     }
 
     public void setMarca(String marca) {
@@ -34,17 +30,22 @@ public class Computer {
         this.processore = processore;
     }
 
-    public int compareTo(Computer c){
-        if (this.capacitaRAM <  c.capacitaRAM)
+    public void setCapacitaRAM(int capacitaRAM) {
+        this.capacitaRAM = capacitaRAM;
+    }
+
+    public int compareTo(Computer c) {
+        if (this.capacitaRAM < c.capacitaRAM)
             return -1;
-         else if (this.capacitaRAM == c.capacitaRAM)
-            return 0;
-        if (this.capacitaRAM > c.capacitaRAM)
+        else if (this.capacitaRAM > c.capacitaRAM)
             return 1;
+        else
+            return 0;
     }
 
-    public String toString(){
-        return "Computer[Marca: " + marca + " Processore:" + processore + " Capacità RAM: " + capacitaRAM + "]";
+    public String toString() {
+        return "Computer [Marca=" + marca +
+                ", Processore=" + processore +
+                ", RAM=" + capacitaRAM + "GB]";
     }
-
 }

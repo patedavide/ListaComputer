@@ -1,17 +1,17 @@
 public class Nodo {
 
-    private String valore;
+    private Computer valore;
     private Nodo next;
 
-    public Nodo(String valore){
+    public Nodo(Computer valore){
         this.valore = valore;
         this.next = null;
     }
 
-    public String getValore() {
+    public Computer getValore() {
         return valore;
     }
-    public void setValore(String valore) {
+    public void setValore(Computer valore) {
         this.valore = valore;
     }
     public Nodo getNext() {
