@@ -34,15 +34,13 @@ public class Computer {
         this.processore = processore;
     }
 
-    public int toCompare(int capacitaRAM){
-        if (this.capacitaRAM <  capacitaRAM){
+    public int compareTo(Computer c){
+        if (this.capacitaRAM <  c.capacitaRAM)
             return -1;
-        } else if (this.capacitaRAM == capacitaRAM) {
+         else if (this.capacitaRAM == c.capacitaRAM)
             return 0;
-        }
-        if (this.capacitaRAM > capacitaRAM){
+        if (this.capacitaRAM > c.capacitaRAM)
             return 1;
-        }
     }
 
     public String toString(){
